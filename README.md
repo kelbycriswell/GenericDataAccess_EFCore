@@ -9,7 +9,7 @@
 
 ## TODO
 - [x] Create GitHub Repo
-- [ ] Add XML Documentation Tags.[^1]
+- [ ] Add XML Documentation Tags '///'.
 - [x] Convert to EFCore to work with .Net Core 3.1
 - [ ] Finish Interface
 - [ ] Finish Abstract GenericRepo Class
@@ -17,5 +17,3 @@
 - [ ] Design Test Cases and Unit Tests
 - [ ] Test and Debug
 
-
-[^1]: Visual Studio Documentation Creator tags ("///").
