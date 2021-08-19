@@ -8,7 +8,7 @@ namespace GenericDataAccess.Repository.Repositories
 {
     public class CustomerRepo : DataAccessRepo<Customer, TestDb>
     {
-        public CustomerRepo(bool lazyLoad = true, params string[] include) : base(lazyLoad, include)
+        public CustomerRepo(bool lazyLoad = false, bool readOnly = false, params string[] include) : base(lazyLoad, readOnly, include)
         {
 
         }

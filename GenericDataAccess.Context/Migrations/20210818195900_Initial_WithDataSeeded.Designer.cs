@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GenericDataAccess.Context.Migrations
 {
     [DbContext(typeof(TestDb))]
-    [Migration("20210812142415_Initial_Setup")]
-    partial class Initial_Setup
+    [Migration("20210818195900_Initial_WithDataSeeded")]
+    partial class Initial_WithDataSeeded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,9 +29,7 @@ namespace GenericDataAccess.Context.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("DateOfBirth")
                         .HasColumnType("datetimeoffset");
@@ -40,78 +38,80 @@ namespace GenericDataAccess.Context.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Email")
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FName")
-                        .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<string>("LName")
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MI")
-                        .HasMaxLength(1)
-                        .HasColumnType("nvarchar(1)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("ModifiedOn")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("PrimaryPhone")
-                        .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecondaryPhone")
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StateAbbr")
-                        .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StreetAddress")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Unit")
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            City = "Layton",
+                            DateOfBirth = new DateTimeOffset(new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, -7, 0, 0, 0)),
+                            Deleted = false,
+                            Email = "123@test.comg",
+                            FName = "Test",
+                            Gender = 0,
+                            LName = "Person",
+                            MI = "A",
+                            ModifiedOn = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            PrimaryPhone = "801-336-3839",
+                            StateAbbr = "UT",
+                            StreetAddress = "437 North Wasatch Drive",
+                            ZipCode = "84041"
+                        });
                 });
 
             modelBuilder.Entity("GenericDataAccess.Context.LineItem", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("OrderID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LineNo")
                         .HasColumnType("int");
 
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("LineNo")
+                    b.Property<int?>("ID")
                         .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("ModifiedOn")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetimeoffset");
 
                     b.Property<int>("ProductID")
@@ -120,9 +120,33 @@ namespace GenericDataAccess.Context.Migrations
                     b.Property<int>("Qty")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("OrderID", "LineNo");
+
+                    b.HasIndex("ID");
+
+                    b.HasIndex("ProductID");
 
                     b.ToTable("LineItems");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderID = 1,
+                            LineNo = 1,
+                            Deleted = false,
+                            ModifiedOn = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            ProductID = 1,
+                            Qty = 3
+                        },
+                        new
+                        {
+                            OrderID = 1,
+                            LineNo = 2,
+                            Deleted = false,
+                            ModifiedOn = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            ProductID = 2,
+                            Qty = 1
+                        });
                 });
 
             modelBuilder.Entity("GenericDataAccess.Context.Order", b =>
@@ -139,8 +163,6 @@ namespace GenericDataAccess.Context.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset>("ModifiedOn")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetimeoffset");
 
                     b.HasKey("ID");
@@ -148,6 +170,15 @@ namespace GenericDataAccess.Context.Migrations
                     b.HasIndex("CustomerID");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            CustomerID = 1,
+                            Deleted = false,
+                            ModifiedOn = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0))
+                        });
                 });
 
             modelBuilder.Entity("GenericDataAccess.Context.Product", b =>
@@ -167,25 +198,54 @@ namespace GenericDataAccess.Context.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("ModifiedOn")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("OnHand")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            CostPerUnit = 5.00m,
+                            Deleted = false,
+                            Description = "An Item to test with",
+                            ModifiedOn = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Name = "Test Item",
+                            OnHand = 12
+                        },
+                        new
+                        {
+                            ID = 2,
+                            CostPerUnit = 10.00m,
+                            Deleted = false,
+                            Description = "An Item to test with",
+                            ModifiedOn = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Name = "Another Test Item",
+                            OnHand = 5
+                        });
                 });
 
             modelBuilder.Entity("GenericDataAccess.Context.LineItem", b =>
                 {
                     b.HasOne("GenericDataAccess.Context.Order", null)
                         .WithMany("LineItems")
-                        .HasForeignKey("ID")
+                        .HasForeignKey("ID");
+
+                    b.HasOne("GenericDataAccess.Context.Product", "Item")
+                        .WithMany()
+                        .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("GenericDataAccess.Context.Order", b =>

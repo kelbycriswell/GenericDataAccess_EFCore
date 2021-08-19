@@ -23,15 +23,7 @@ namespace GenericDataAccess.Interfaces
         /// </summary>
         void OnSavingHandler(object sender, SavingChangesEventArgs e);
 
-        //Create
-
-        /// <summary>
-        /// Attaches supplied object to context and Sets EntityState to 'Added'.
-        /// </summary>
-        /// <param name="objToInsert">Reference to object to be inserted to database.</param>
-        void Insert(ref TEntity objToInsert);
-
-        //Read
+       //Read
 
         /// <summary>
         /// Returns a single entity from database using the Primary Key(s) of the entry.
@@ -50,35 +42,32 @@ namespace GenericDataAccess.Interfaces
         /// <summary>
         /// Used to get all entries in a database of the provided <typeparamref name="TEntity"/>
         /// </summary>
-        /// <returns>IEnumerable of Entries in the database, empty IEnumerable if none found</returns>
-        IEnumerable<TEntity> GetAll();
+        /// <returns>List of Entries in the database, empty List if none found</returns>
+        List<TEntity> GetAll();
 
         /// <summary>
         /// Used to get all entries in a database of the provided <typeparamref name="TEntity"/> filtered by the supplied lamba expression
         /// </summary>
         /// <param name="predicate">Lambda Expression used to filter results</param>
-        /// <returns>IEnumerable of Entries in the database filtered by Lambda Expression, Empty IEnumerable if none found</returns>
-        IEnumerable<TEntity> GetWhere(Expression<Func<TEntity, bool>> predicate);
+        /// <returns>List of Entries in the database filtered by Lambda Expression, Empty List if none found</returns>
+        List<TEntity> GetWhere(Expression<Func<TEntity, bool>> predicate);
 
         /// <summary>
-        /// Used to get an ordered IEnumerable of entries in a database of the provided <typeparamref name="TEntity"/> filtered by the supplied lamba expression and ordered by a separate lambda expression
+        /// Used to get an ordered List of entries in a database of the provided <typeparamref name="TEntity"/> filtered by the supplied lamba expression and ordered by a separate lambda expression
         /// </summary>
         /// <param name="predicate">Lambda Expression used to filter results</param>
         /// <param name="orderBy">Lambda Expression used to order results</param>
         /// <param name="ascending">True, orders in ascedning orderl False, orders in descending order</param>
-        /// <returns>Ordered IEnumerable of Entries in the database filtered by Lambda Expression, Empty IEnumerable if none found</returns>
-        IEnumerable<TEntity> GetOrderedWhere(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, object>> orderBy, bool ascending = true);
+        /// <returns>Ordered List of Entries in the database filtered by Lambda Expression, Empty List if none found</returns>
+        List<TEntity> GetOrderedWhere(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, object>> orderBy, bool ascending = true);
 
         //Update
-
-
-        void Update(ref TEntity objToUpdate);
 
 
         void AddOrUpdate(ref TEntity objToUpdate);
 
 
-        void AddOrUpdate(ref IEnumerable<TEntity> objsToUpdate);
+        void AddOrUpdate(ref List<TEntity> objsToUpdate);
 
 
 

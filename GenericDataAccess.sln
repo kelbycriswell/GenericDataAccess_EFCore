@@ -10,11 +10,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericDataAccess.Repositor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericDataAccess.Context", "GenericDataAccess.Context\GenericDataAccess.Context.csproj", "{474A41CB-4615-4421-AF99-841DFD4FF8CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericDataAccess.App", "GenericDataAccess.App\GenericDataAccess.App.csproj", "{3F9592D3-840F-4207-81FF-E02CF734AD72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericDataAccess.App", "GenericDataAccess.App\GenericDataAccess.App.csproj", "{3F9592D3-840F-4207-81FF-E02CF734AD72}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2B4DE012-5437-4066-B428-0E9538BA5D04} = {2B4DE012-5437-4066-B428-0E9538BA5D04}
 		{474A41CB-4615-4421-AF99-841DFD4FF8CE} = {474A41CB-4615-4421-AF99-841DFD4FF8CE}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericDataAccess.Tests", "GenericDataAccess.Tests\GenericDataAccess.Tests.csproj", "{9F0E0E5B-E90E-4895-8D79-9E47782164A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +36,10 @@ Global
 		{3F9592D3-840F-4207-81FF-E02CF734AD72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F9592D3-840F-4207-81FF-E02CF734AD72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F9592D3-840F-4207-81FF-E02CF734AD72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F0E0E5B-E90E-4895-8D79-9E47782164A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F0E0E5B-E90E-4895-8D79-9E47782164A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F0E0E5B-E90E-4895-8D79-9E47782164A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F0E0E5B-E90E-4895-8D79-9E47782164A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -27,7 +27,7 @@ namespace GenericDataAccess.App
             bool _changeName = false;
             do
             {
-                Console.Write("Would you like to edit a Customers Name?(y/n): ");
+                Console.WriteLine("Please select an option: ");
                 _choice = Console.ReadKey().KeyChar;
 
                 switch (_choice)
