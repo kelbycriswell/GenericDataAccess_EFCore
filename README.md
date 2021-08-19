@@ -10,7 +10,7 @@
 ## TODO
 - [x] Create GitHub Repo
 - [ ] Add XML Documentation Tags.[^1]
-- [ ] Convert to EFCore to work with .Net Core 3.1
+- [x] Convert to EFCore to work with .Net Core 3.1
 - [ ] Finish Interface
 - [ ] Finish Abstract GenericRepo Class
 - [ ] Create example implementation
