@@ -3,7 +3,7 @@
   *This is a practice project for me to practice and learn the best ways to implement Data Access Repositories using **SOLID** design patterns, **EF6 / EFCore**, and Interfaces*
   ---
   The goal is to fully implement a library that will: 
-  - Allow the implentations to access data consistently.
+  - Allow the implimentations to access data consistently.
   - Maintain a DRY coding method.
   - In turn will reduce errors, increase readablility, and allow for scalability.
 
